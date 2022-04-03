@@ -1,8 +1,9 @@
 // Copyright 2021 NNTU-CS
+const int size = 100;
 #ifndef INCLUDE_TSTACK_H_
 #define INCLUDE_TSTACK_H_
 
-template<typename T, int size>
+template<class T>
 class TStack {
     private:
         T arr[size];
