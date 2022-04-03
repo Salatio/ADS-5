@@ -1,12 +1,11 @@
 // Copyright 2021 NNTU-CS
-const int size = 100;
 #ifndef INCLUDE_TSTACK_H_
 #define INCLUDE_TSTACK_H_
 
-template<class T>
+template<class T, int size>
 class TStack {
     private:
-        T arr[size];
+        T arr[100];
         int top;
     public:
         TStack():top(-1) { }
