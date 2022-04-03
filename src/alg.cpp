@@ -82,20 +82,24 @@ std::string infx2pstfx(std::string inf) {
                         }
                       break;
                   case 3:
-                      if (Prior(stack1.get()) < Prior(inf[i]))
+                     if (Prior(stack1.get()) < Prior(inf[i])) {
                           stack1.push(inf[i]);
-                      else {
-                          while (!stack1.isEmpty()) {
-                              if (Prior(stack1.get()) == 0)
-                                  break;
-                              else if (Prior(stack1.get()) >= Prior(inf[i]) {
-                                  out += stack1.get();
-                                  out += " ";
-                                  stack1.pop();
-                              }
-                          }
-                          stack1.push(inf[i]);
-                      }
+                      } else {
+                            while (!stack1.isEmpty()) {
+                                if (Prior(stack1.get()) == 0) {
+                                    break;
+                                } else {
+                                      int t1 = Prior(stack1.get());
+                                      int t2 = Prior(inf[i]);
+                                      if (t1 >= t2) {
+                                          out += stack1.get();
+                                          out += " ";
+                                          stack1.pop();
+                                      }
+                                  }
+                            }
+                            stack1.push(inf[i]);
+                        }
                       break;
               }
           }
@@ -117,31 +121,30 @@ int eval(std::string pref) {
                 temp += post[i];
                 stack1.push(std::stoi(temp));
                 temp = "";
-            }
-            else {
-                int temp1 = stack1.get();
-                stack1.pop();
-                int temp2 = stack1.get();
-                stack1.pop();
-                switch (post[i]) {
-                    case '+':
-                        count = temp2 + temp1;
-                        stack1.push(count);
-                        break;
-                    case '-':
-                        count = temp2 - temp1;
-                        stack1.push(count);
-                        break;
-                    case '*':
-                        count = temp2 * temp1;
-                        stack1.push(count);
-                        break;
-                    case '/':
-                        count = temp2 / temp1;
-                        stack1.push(count);
-                        break;
-                }
-            }
+            } else {
+                  int temp1 = stack1.get();
+                  stack1.pop();
+                  int temp2 = stack1.get();
+                  stack1.pop();
+                  switch (post[i]) {
+                      case '+':
+                          count = temp2 + temp1;
+                          stack1.push(count);
+                          break;
+                      case '-':
+                          count = temp2 - temp1;
+                          stack1.push(count);
+                          break;
+                      case '*':
+                          count = temp2 * temp1;
+                          stack1.push(count);
+                          break;
+                      case '/':
+                          count = temp2 / temp1;
+                          stack1.push(count);
+                          break;
+                  }
+              }
             if (i+1 == post.length()) {
                 count = stack1.get();
                 stack1.pop();
