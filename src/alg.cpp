@@ -22,79 +22,79 @@ std::string infx2pstfx(std::string inf) {
     std::string out = "";
     TStack<char> stack1;
     for (int i = 0; i < inf.length(); ++i) {
-        if (stack1.isEmpty() && Prior(inf[i]) != -1)
+        if (stack1.isEmpty() && Prior(inf[i]) != -1) {
             stack1.push(inf[i]);
-        else {
-            switch (Prior(inf[i])) {
-                case -1:
-                    out += inf[i];
-                    if (Prior(inf[i]) != -1)
-                        out += " ";
-                    if (i+1 == inf.length()) {
-                        while (!stack1.isEmpty()) {
-                            out += " ";
-                            out += stack1.get();
-                            stack1.pop();
-                        }
-                    }
-                    break;
-                case 0:
-                    stack1.push(inf[i]);
-                    break;
-                case 1: {
-                    while (!stack1.isEmpty()) {
-                        if (Prior(stack1.get()) > 0) {
-                            out += stack1.get();
-                            out += " ";
-                            stack1.pop();
-                        } else {
-                              stack1.pop();
-                              break;
-                          }
-                    }
-                    if (i+1 == inf.length()) {
-                        while (!stack1.isEmpty()) {
-                            out += stack1.get();
-                            out += " ";
-                            stack1.pop();
-                        }
-                    }
-                    break;
-                }
-                case 2:
-                    if (Prior(stack1.get()) < Prior(inf[i])) {
-                        stack1.push(inf[i]);
-                    } else {
+        } else {
+              switch (Prior(inf[i])) {
+                  case -1:
+                      out += inf[i];
+                      if (Prior(inf[i]) != -1)
+                          out += " ";
+                      if (i+1 == inf.length()) {
                           while (!stack1.isEmpty()) {
-                              if (Prior(stack1.get()) == 0) {
+                              out += " ";
+                              out += stack1.get();
+                              stack1.pop();
+                          }
+                      }
+                      break;
+                  case 0:
+                      stack1.push(inf[i]);
+                      break;
+                  case 1: {
+                      while (!stack1.isEmpty()) {
+                          if (Prior(stack1.get()) > 0) {
+                              out += stack1.get();
+                              out += " ";
+                              stack1.pop();
+                          } else {
+                                stack1.pop();
+                                break;
+                            }
+                      }
+                      if (i+1 == inf.length()) {
+                          while (!stack1.isEmpty()) {
+                              out += stack1.get();
+                              out += " ";
+                              stack1.pop();
+                          }
+                      }
+                      break;
+                  }
+                  case 2:
+                      if (Prior(stack1.get()) < Prior(inf[i])) {
+                          stack1.push(inf[i]);
+                      } else {
+                            while (!stack1.isEmpty()) {
+                                if (Prior(stack1.get()) == 0) {
+                                    break;
+                                } else if (Prior(stack1.get()) >= Prior(inf[i])) {
+                                      out += stack1.get();
+                                      out += " ";
+                                      stack1.pop();
+                                  }
+                            }
+                            stack1.push(inf[i]);
+                        }
+                      break;
+                  case 3:
+                      if (Prior(stack1.get()) < Prior(inf[i]))
+                          stack1.push(inf[i]);
+                      else {
+                          while (!stack1.isEmpty()) {
+                              if (Prior(stack1.get()) == 0)
                                   break;
-                              } else if (Prior(stack1.get()) >= Prior(inf[i])) {
-                                    out += stack1.get();
-                                    out += " ";
-                                    stack1.pop();
-                                }
+                              else if (Prior(stack1.get()) >= Prior(inf[i]) {
+                                  out += stack1.get();
+                                  out += " ";
+                                  stack1.pop();
+                              }
                           }
                           stack1.push(inf[i]);
                       }
-                    break;
-                case 3:
-                    if (Prior(stack1.get()) < Prior(inf[i]))
-                        stack1.push(inf[i]);
-                    else {
-                        while (!stack1.isEmpty()) {
-                            if (Prior(stack1.get()) == 0)
-                                break;
-                            else if (Prior(stack1.get()) >= Prior(inf[i]) {
-                                out += stack1.get();
-                                out += " ";
-                                stack1.pop();
-                            }
-                        }
-                        stack1.push(inf[i]);
-                    }
-                    break;
-            }
-        }
+                      break;
+              }
+          }
     }
     if (out[out.length()-1] == ' ') {
         std::string temp = out;
