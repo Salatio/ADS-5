@@ -152,4 +152,5 @@ int eval(std::string pref) {
             }
         }
     }
+    return count;
 }
