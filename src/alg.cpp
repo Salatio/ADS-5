@@ -114,11 +114,11 @@ std::string infx2pstfx(std::string inf) {
 int eval(std::string pref) {
     TStack<int, 100> stack1;
     int count = 0;
-    for (int i = 0; i < post.length(); ++i) {
-        if (post[i] != ' ') {
-            if (Prior(post[i]) == -1) {
+    for (int i = 0; i < pref.length(); ++i) {
+        if (pref[i] != ' ') {
+            if (Prior(pref[i]) == -1) {
                 std::string temp = "";
-                temp += post[i];
+                temp += pref[i];
                 stack1.push(std::stoi(temp));
                 temp = "";
             } else {
@@ -126,7 +126,7 @@ int eval(std::string pref) {
                   stack1.pop();
                   int temp2 = stack1.get();
                   stack1.pop();
-                  switch (post[i]) {
+                  switch (pref[i]) {
                       case '+':
                           count = temp2 + temp1;
                           stack1.push(count);
@@ -145,7 +145,7 @@ int eval(std::string pref) {
                           break;
                   }
               }
-            if (i+1 == post.length()) {
+            if (i+1 == pref.length()) {
                 count = stack1.get();
                 stack1.pop();
                 return count;
