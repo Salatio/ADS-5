@@ -24,7 +24,7 @@ class TStack {
     }
     void push(T item) {
         if (top < size-1)
-            arr[++top]=item;
+            arr[++top] = item;
     }
 };
 #endif  // INCLUDE_TSTACK_H_
