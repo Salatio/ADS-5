@@ -61,8 +61,45 @@ std::string infx2pstfx(std::string inf) {
                     }
                     break;
                 }
+                case 2:
+                    if (Prior(stack1.get()) < Prior(inf[i]))
+                        stack1.push(inf[i]);
+                    else {
+                        while (!stack1.isEmpty()) {
+                            if (Prior(stack1.get()) == 0)
+                                break;
+                            else if (Prior(stack1.get()) >= Prior(inf[i])) {
+                                out += stack1.get();
+                                out += " ";
+                                stack1.pop();
+                            }
+                        }
+                        stack1.push(inf[i]);
+                    }
+                    break;
+                case 3:
+                    if (Prior(stack1.get()) < Prior(inf[i]))
+                        stack1.push(inf[i]);
+                    else {
+                        while (!stack1.isEmpty()) {
+                            if (Prior(stack1.get()) == 0)
+                                break;
+                            else if (Prior(stack1.get()) >= Prior(inf[i]) {
+                                out += stack1.get();
+                                out += " ";
+                                stack1.pop();
+                            }
+                        }
+                        stack1.push(inf[i]);
+                    }
+                    break;
             }
     }
+    if (out[out.length()-1] == ' ') {
+        std::string temp = out;
+        out.assign(temp, 0, temp.length()-1);
+    }
+    return out;
 }
 
 int eval(std::string pref) {
