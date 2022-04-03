@@ -112,7 +112,7 @@ std::string infx2pstfx(std::string inf) {
 }
 
 int eval(std::string pref) {
-    TStack1<int, 100> stack1;
+    TStack<int, 100> stack1;
     int count = 0;
     for (int i = 0; i < post.length(); ++i) {
         if (post[i] != ' ') {
