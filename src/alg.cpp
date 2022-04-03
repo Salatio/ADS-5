@@ -13,7 +13,7 @@ int Prior(chac c) {
         ret = 2;
     else if (c == '*' || c == '/')
         ret = 3;
-    else 
+    else
         ret = -1;
     return ret;
 }
@@ -24,8 +24,8 @@ std::string infx2pstfx(std::string inf) {
     for (int i = 0; i < inf.length(); ++i) {
         if (stack1.isEmpty() && Prior(inf[i]) != -1)
             stack1.push(inf[i]);
-        else
-            switch( Prior(inf[i]) ) {
+        else {
+            switch (Prior(inf[i])) {
                 case -1:
                     out += inf[i];
                     if (Prior(inf[i]) != -1)
@@ -62,20 +62,20 @@ std::string infx2pstfx(std::string inf) {
                     break;
                 }
                 case 2:
-                    if (Prior(stack1.get()) < Prior(inf[i]))
+                    if (Prior(stack1.get()) < Prior(inf[i])) {
                         stack1.push(inf[i]);
-                    else {
-                        while (!stack1.isEmpty()) {
-                            if (Prior(stack1.get()) == 0)
-                                break;
-                            else if (Prior(stack1.get()) >= Prior(inf[i])) {
-                                out += stack1.get();
-                                out += " ";
-                                stack1.pop();
-                            }
-                        }
-                        stack1.push(inf[i]);
-                    }
+                    } else {
+                          while (!stack1.isEmpty()) {
+                              if (Prior(stack1.get()) == 0) {
+                                  break;
+                              } else if (Prior(stack1.get()) >= Prior(inf[i])) {
+                                    out += stack1.get();
+                                    out += " ";
+                                    stack1.pop();
+                                }
+                          }
+                          stack1.push(inf[i]);
+                      }
                     break;
                 case 3:
                     if (Prior(stack1.get()) < Prior(inf[i]))
@@ -94,6 +94,7 @@ std::string infx2pstfx(std::string inf) {
                     }
                     break;
             }
+        }
     }
     if (out[out.length()-1] == ' ') {
         std::string temp = out;
@@ -118,7 +119,7 @@ int eval(std::string pref) {
                 stack1.pop();
                 int temp2 = stack1.get();
                 stack1.pop();
-                switch(post[i]) {
+                switch (post[i]) {
                     case '+':
                         count = temp2 + temp1;
                         stack1.push(count);
