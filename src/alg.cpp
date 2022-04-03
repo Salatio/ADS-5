@@ -103,4 +103,43 @@ std::string infx2pstfx(std::string inf) {
 }
 
 int eval(std::string pref) {
+    TStack1<int, 100> stack1;
+    int count = 0;
+    for (int i = 0; i < post.length(); ++i) {
+        if (post[i] != ' ') {
+            if (Prior(post[i]) == -1) {
+                std::string temp = "";
+                temp += post[i];
+                stack1.push(std::stoi(temp));
+                temp = "";
+            }
+            else {
+                int temp1 = stack1.get();
+                stack1.pop();
+                int temp2 = stack1.get();
+                stack1.pop();
+                if (post[i] == '+') {
+                    count = temp2 + temp1;
+                    stack1.push(count);
+                }
+                else if (post[i] == '-') {
+                    count = temp2 - temp1;
+                    stack1.push(count);
+                }
+                else if (post[i] == '*') {
+                    count = temp2 * temp1;
+                    stack1.push(count);
+                }
+                else if (post[i] == '/') {
+                    count = temp2 / temp1;
+                    stack1.push(count);
+                }
+            }
+            if (i+1 == post.length()) {
+                count = stack1.get();
+                stack1.pop();
+                return count;
+            }
+        }
+    }
 }
