@@ -5,7 +5,7 @@
 
 int Prior(char c) {
     int ret = -1;
-    if (c == 'C' )
+    if (c == '(' )
         ret = 0;
     else if (c == ')' )
         ret = 1;
@@ -28,7 +28,7 @@ std::string infx2pstfx(std::string inf) {
               switch (Prior(inf[i])) {
                   case -1:
                       out += inf[i];
-                      if (Prior(inf[i]) != -1)
+                      if (Prior(inf[i+1]) != -1)
                           out += " ";
                       if (i+1 == inf.length()) {
                           while (!stack1.isEmpty()) {
