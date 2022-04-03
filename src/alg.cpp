@@ -19,7 +19,7 @@ int Prior(chac c) {
 
 std::string infx2pstfx(std::string inf) {
     std::string out = "";
-    TStack<char, 100> stack1;
+    TStack<char> stack1;
     for (int i = 0; i < inf.length(); ++i) {
         if (stack1.isEmpty() && Prior(inf[i]) != -1)
             stack1.push(inf[i]);
@@ -103,7 +103,7 @@ std::string infx2pstfx(std::string inf) {
 }
 
 int eval(std::string pref) {
-    TStack1<int, 100> stack1;
+    TStack1<int> stack1;
     int count = 0;
     for (int i = 0; i < post.length(); ++i) {
         if (post[i] != ' ') {
