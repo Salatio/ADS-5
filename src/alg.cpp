@@ -3,7 +3,7 @@
 #include <map>
 #include "tstack.h"
 
-int Prior(chac c) {
+int Prior(char c) {
     int ret = -1;
     if (c == 'C' )
         ret = 0;
@@ -20,7 +20,7 @@ int Prior(chac c) {
 
 std::string infx2pstfx(std::string inf) {
     std::string out = "";
-    TStack<char> stack1;
+    TStack<char, 100> stack1;
     for (int i = 0; i < inf.length(); ++i) {
         if (stack1.isEmpty() && Prior(inf[i]) != -1) {
             stack1.push(inf[i]);
@@ -68,10 +68,14 @@ std::string infx2pstfx(std::string inf) {
                             while (!stack1.isEmpty()) {
                                 if (Prior(stack1.get()) == 0) {
                                     break;
-                                } else if (Prior(stack1.get()) >= Prior(inf[i])) {
-                                      out += stack1.get();
-                                      out += " ";
-                                      stack1.pop();
+                                } else {
+                                      int t1 = Prior(stack1.get());
+                                      int t2 = Prior(inf[i]);
+                                      if (t1 >= t2) {
+                                          out += stack1.get();
+                                          out += " ";
+                                          stack1.pop();
+                                      }
                                   }
                             }
                             stack1.push(inf[i]);
@@ -104,7 +108,7 @@ std::string infx2pstfx(std::string inf) {
 }
 
 int eval(std::string pref) {
-    TStack1<int> stack1;
+    TStack1<int, 100> stack1;
     int count = 0;
     for (int i = 0; i < post.length(); ++i) {
         if (post[i] != ' ') {
@@ -135,7 +139,7 @@ int eval(std::string pref) {
                     case '/':
                         count = temp2 / temp1;
                         stack1.push(count);
-                        break;    
+                        break;
                 }
             }
             if (i+1 == post.length()) {
