@@ -13,7 +13,8 @@ int Prior(chac c) {
         ret = 2;
     else if (c == '*' || c == '/')
         ret = 3;
-    else ret = -1;
+    else 
+        ret = -1;
     return ret;
 }
 
@@ -24,7 +25,7 @@ std::string infx2pstfx(std::string inf) {
         if (stack1.isEmpty() && Prior(inf[i]) != -1)
             stack1.push(inf[i]);
         else
-            switch(Prior(inf[i])) {
+            switch( Prior(inf[i]) ) {
                 case -1:
                     out += inf[i];
                     if (Prior(inf[i]) != -1)
@@ -40,17 +41,16 @@ std::string infx2pstfx(std::string inf) {
                 case 0:
                     stack1.push(inf[i]);
                     break;
-                case 1:{
+                case 1: {
                     while (!stack1.isEmpty()) {
                         if (Prior(stack1.get()) > 0) {
                             out += stack1.get();
                             out += " ";
                             stack1.pop();
-                        }
-                        else {
-                            stack1.pop();
-                            break;
-                        }
+                        } else {
+                              stack1.pop();
+                              break;
+                          }
                     }
                     if (i+1 == inf.length()) {
                         while (!stack1.isEmpty()) {
@@ -118,21 +118,23 @@ int eval(std::string pref) {
                 stack1.pop();
                 int temp2 = stack1.get();
                 stack1.pop();
-                if (post[i] == '+') {
-                    count = temp2 + temp1;
-                    stack1.push(count);
-                }
-                else if (post[i] == '-') {
-                    count = temp2 - temp1;
-                    stack1.push(count);
-                }
-                else if (post[i] == '*') {
-                    count = temp2 * temp1;
-                    stack1.push(count);
-                }
-                else if (post[i] == '/') {
-                    count = temp2 / temp1;
-                    stack1.push(count);
+                switch(post[i]) {
+                    case '+':
+                        count = temp2 + temp1;
+                        stack1.push(count);
+                        break;
+                    case '-':
+                        count = temp2 - temp1;
+                        stack1.push(count);
+                        break;
+                    case '*':
+                        count = temp2 * temp1;
+                        stack1.push(count);
+                        break;
+                    case '/':
+                        count = temp2 / temp1;
+                        stack1.push(count);
+                        break;    
                 }
             }
             if (i+1 == post.length()) {
